@@ -14,12 +14,12 @@
         tools:layout = "@layout/fragment_display"
         />
 
-
     <fragment
         android:id="@+id/frag_input"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:name="com.example.prashant.calculator.InputFragment"
         tools:layout = "@layout/fragment_input"
+        android:layout_below="@+id/frag_display"
         />
 </RelativeLayout>
