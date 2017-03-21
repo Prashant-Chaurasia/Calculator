@@ -1,2 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+    <style name="NumberButton" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/number_button</item>
+        <item name="android:textSize">34sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="OperationButton" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/operation_button</item>
+        <item name="android:textSize">34sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="tvDisplay">
+        
+        <item name="android:textSize">50sp</item>
+        <item name="android:gravity">center_vertical|right</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        
+    </style>
+    
+    <style name="ScrollViewDisplay">
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+    </style>
+
+    <style name="imgbuttonDisplay" parent="Base.Widget.AppCompat.ImageButton">
+        <item name="android:background">@drawable/button_display</item>
+        <item name="android:alpha">.54</item>
+    </style>
+</resources>
