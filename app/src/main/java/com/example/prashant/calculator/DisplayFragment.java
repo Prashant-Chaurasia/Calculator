@@ -18,12 +18,24 @@ import butterknife.OnLongClick;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DisplayFragment extends Fragment {
+public class DisplayFragment extends Fragment implements CalculatorContract.PublishToView {
+
+
+    private CalculatorContract.ForwardDisplayIteractionToPresenter forwardInteraction;
+
+    public void setPresenter(CalculatorContract.ForwardDisplayIteractionToPresenter forwardInteraction){
+        this.forwardInteraction = forwardInteraction;
+    }
+
+
     public DisplayFragment() {
         // Required empty public constructor
     }
 
 
+    public DisplayFragment newInstance(){
+        return new DisplayFragment();
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -38,12 +50,21 @@ public class DisplayFragment extends Fragment {
     TextView display;
 
     @OnClick(R.id.imb_display_delete)
-    public void onShortClick(View v){
+    public void onDeleteShortClick(View v){
 
     }
     @OnLongClick(R.id.imb_display_delete)
-    public void onLongClick(View v){
-        
+    public void onDeleteLongClick(View v){
+        forwardInteraction.onDeleteShortClick();
     }
 
+    @Override
+    public void showResult(String result) {
+    forwardInteraction.onDeleteLongClick();
+    }
+
+    @Override
+    public void showToastMessage(String message) {
+
+    }
 }
