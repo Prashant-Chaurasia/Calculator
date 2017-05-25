@@ -1,6 +1,4 @@
 package com.example.prashant.calculator;
-
-import org.javia.arity.Symbol;
 import org.javia.arity.Symbols;
 import org.javia.arity.SyntaxException;
 
@@ -37,6 +35,7 @@ public class Calculation {
     public void deleteCharacter(){
         if(currentExp.length()>0){
             currentExp = currentExp.substring(0,currentExp.length()-1);
+            calculationResult.onExpressionChange(currentExp,true);
         }
         else{
             calculationResult.onExpressionChange("Invalid Input",false);
@@ -70,6 +69,7 @@ public class Calculation {
         }
         else{
             if(currentExp.length()<=16){
+                currentExp += number;
                 calculationResult.onExpressionChange(currentExp,true);
             }
             else{
@@ -94,12 +94,15 @@ public class Calculation {
     public void appendOperator(String operator){
         if(validateExp(currentExp)){
             currentExp+=operator;
+            calculationResult.onExpressionChange(currentExp,true);
         }
     }
     public void appendDecimal(){
         if(currentExp.equals("")){
             currentExp = "0.";
+            calculationResult.onExpressionChange(currentExp,true);
         }
+
         else {
             if (validateExp(currentExp)) {
                 currentExp += ".";

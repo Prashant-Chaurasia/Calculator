@@ -1,13 +1,13 @@
 package com.example.prashant.calculator;
 
-import android.content.Context;
-import android.net.Uri;
+
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -16,55 +16,61 @@ import butterknife.OnLongClick;
 
 
 /**
+ * Why seperate the UI (View) into two Fragments?
+ *
+ * In this case, I am attempting to apply the Single Responsibility Principle.
+ *
+ * This View is responsible for Displaying the result of Inputs to the InputFragment.
+ *
  * A simple {@link Fragment} subclass.
  */
 public class DisplayFragment extends Fragment implements CalculatorContract.PublishToView {
 
+    private CalculatorContract.ForwardDisplayInteractionToPresenter forwardInteraction;
 
-    private CalculatorContract.ForwardDisplayIteractionToPresenter forwardInteraction;
-
-    public void setPresenter(CalculatorContract.ForwardDisplayIteractionToPresenter forwardInteraction){
+    public void setPresenter (CalculatorContract.ForwardDisplayInteractionToPresenter
+                                      forwardInteraction){
         this.forwardInteraction = forwardInteraction;
     }
 
+    @BindView(R.id.tv_display)
+    TextView display;
+
+    @OnClick(R.id.imb_display_delete)
+    public void onDeleteShortClick(View v){
+        forwardInteraction.onDeleteShortClick();
+    }
+
+    @OnLongClick(R.id.imb_display_delete)
+    public boolean onDeleteLongClick(View v){
+        forwardInteraction.onDeleteLongClick();
+        return true;
+    }
 
     public DisplayFragment() {
         // Required empty public constructor
     }
 
-
-    public DisplayFragment newInstance(){
+    public static DisplayFragment newInstance(){
         return new DisplayFragment();
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_input, container, false);
-        ButterKnife.bind(this,view);
-        return view;
-    }
-
-    //Butterknife use ..
-
-    @BindView(R.id.tv_display) //equivalent to findViewById ..
-    TextView display;
-
-    @OnClick(R.id.imb_display_delete)
-    public void onDeleteShortClick(View v){
-
-    }
-    @OnLongClick(R.id.imb_display_delete)
-    public void onDeleteLongClick(View v){
-        forwardInteraction.onDeleteShortClick();
+        // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.fragment_display, container, false);
+        ButterKnife.bind(this, v);
+        return v;
     }
 
     @Override
     public void showResult(String result) {
-    forwardInteraction.onDeleteLongClick();
+        display.setText(result);
     }
 
     @Override
     public void showToastMessage(String message) {
-
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 }

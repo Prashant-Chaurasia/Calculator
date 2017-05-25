@@ -13,12 +13,12 @@ public interface CalculatorContract {
     }
 
     //passes click events from our DisplayFragment to the presenter
-    interface ForwardDisplayIteractionToPresenter{
+    interface ForwardDisplayInteractionToPresenter{
         void onDeleteShortClick();
         void onDeleteLongClick();
     }
     //passes click events from our InputFragemt to the presenter
-    interface ForwardInputIteractionToPresenter{
+    interface ForwardInputInteractionToPresenter{
         void onNumberClick(int number);
         void onOperatorClick(String operator);
         void onDecimalClick();
