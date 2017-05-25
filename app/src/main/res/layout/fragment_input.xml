@@ -133,7 +133,7 @@
         android:layout_weight="1">
 
         <Button
-            android:id="@+id/btn_number_zero"
+            android:id="@+id/btn_decimal"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
@@ -141,7 +141,7 @@
             style="@style/NumberButton"/>
 
         <Button
-            android:id="@+id/btn_decimal"
+            android:id="@+id/btn_number_zero"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
