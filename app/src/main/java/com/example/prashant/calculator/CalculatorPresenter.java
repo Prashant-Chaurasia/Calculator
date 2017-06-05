@@ -52,4 +52,14 @@ public class CalculatorPresenter implements CalculatorContract.ForwardInputInter
         }
     }
 
+    @Override
+    public void onExpressionChangeResult(String result, boolean successful) {
+        if(successful){
+            publishResult.showCalculation(result);
+        }
+        else {
+            publishResult.showToastMessage(result);
+        }
+    }
+
 }

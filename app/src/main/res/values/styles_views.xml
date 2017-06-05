@@ -15,7 +15,7 @@
 
     <style name="tvDisplay">
         
-        <item name="android:textSize">56sp</item>
+        <item name="android:textSize">50sp</item>
         <item name="android:gravity">center_vertical|right</item>
         <item name="android:maxLines">1</item>
         
@@ -24,6 +24,7 @@
     <style name="ScrollViewDisplay">
         <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingTop">15dp</item>
     </style>
 
     <style name="imgbuttonDisplay" parent="Base.Widget.AppCompat.ImageButton">

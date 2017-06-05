@@ -33,8 +33,11 @@ public class DisplayFragment extends Fragment implements CalculatorContract.Publ
         this.forwardInteraction = forwardInteraction;
     }
 
-    @BindView(R.id.tv_display)
+    @BindView(R.id.tv_display_exp)
     TextView display;
+
+    @BindView(R.id.tv_display_res)
+    TextView displayRes;
 
     @OnClick(R.id.imb_display_delete)
     public void onDeleteShortClick(View v){
@@ -73,4 +76,10 @@ public class DisplayFragment extends Fragment implements CalculatorContract.Publ
     public void showToastMessage(String message) {
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void showCalculation(String result) {
+        displayRes.setText(result);
+    }
+
 }

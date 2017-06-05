@@ -11,9 +11,11 @@ public class Calculation {
     private final Symbols symbols;
     private CalcResult calculationResult;
     private static String currentExp;
+    private static int count = 0;
 
     interface CalcResult{
         void onExpressionChange(String result,boolean successful);
+        void onExpressionChangeResult(String result,boolean successful);
     }
 
     public Calculation(){
@@ -36,6 +38,7 @@ public class Calculation {
         if(currentExp.length()>0){
             currentExp = currentExp.substring(0,currentExp.length()-1);
             calculationResult.onExpressionChange(currentExp,true);
+            calculationResult.onExpressionChangeResult("",true);
         }
         else{
             calculationResult.onExpressionChange("Invalid Input",false);
@@ -54,6 +57,7 @@ public class Calculation {
         }
         currentExp = "";
         calculationResult.onExpressionChange(currentExp,true);
+        calculationResult.onExpressionChangeResult("",true);
 
     }
 
@@ -64,13 +68,16 @@ public class Calculation {
      * @param number
      */
     public void appendNumber(String number){
-        if(currentExp.startsWith("0")&&number.equals("0")){
-            calculationResult.onExpressionChange("Invalid Input",false);
+        if(currentExp.startsWith("0")&&number.equals("0")&&currentExp.length()==1){
+            calculationResult.onExpressionChange(currentExp,true);
         }
         else{
             if(currentExp.length()<=16){
                 currentExp += number;
                 calculationResult.onExpressionChange(currentExp,true);
+                if(count>0){
+                    performCalculation();
+                }
             }
             else{
                 calculationResult.onExpressionChange("Expression is too long",false);
@@ -95,6 +102,7 @@ public class Calculation {
         if(validateExp(currentExp)){
             currentExp+=operator;
             calculationResult.onExpressionChange(currentExp,true);
+            count++;
         }
     }
     public void appendDecimal(){
@@ -121,8 +129,21 @@ public class Calculation {
                 Double result = symbols.eval(currentExp);
                 currentExp = Double.toString(result);
                 calculationResult.onExpressionChange(currentExp,true);
+                count=0;
             }catch (SyntaxException e) {
                 calculationResult.onExpressionChange("Invalid Input",false);
+                e.printStackTrace();
+            }
+        }
+
+    }
+    public void performCalculation(){
+        if(validateExp(currentExp)){
+            try {
+                Double result = symbols.eval(currentExp);
+                calculationResult.onExpressionChangeResult(Double.toString(result),true);
+            }catch (SyntaxException e) {
+                calculationResult.onExpressionChangeResult("Invalid Input",false);
                 e.printStackTrace();
             }
         }

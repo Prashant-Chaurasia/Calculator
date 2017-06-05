@@ -10,6 +10,7 @@ public interface CalculatorContract {
     interface PublishToView{
         void showResult(String result);
         void showToastMessage(String message);
+        void showCalculation(String result);
     }
 
     //passes click events from our DisplayFragment to the presenter
